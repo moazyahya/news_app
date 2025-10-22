@@ -22,12 +22,31 @@ class $AssetsImagesGen {
   AssetGenImage get generalCard =>
       const AssetGenImage('assets/images/general_card.png');
 
+  /// File path: assets/images/language_icon.png
+  AssetGenImage get languageIcon =>
+      const AssetGenImage('assets/images/language_icon.png');
+
   /// File path: assets/images/sports_card.png
   AssetGenImage get sportsCard =>
       const AssetGenImage('assets/images/sports_card.png');
 
+  /// File path: assets/images/technology_card.png
+  AssetGenImage get technologyCard =>
+      const AssetGenImage('assets/images/technology_card.png');
+
+  /// File path: assets/images/theme_icon.png
+  AssetGenImage get themeIcon =>
+      const AssetGenImage('assets/images/theme_icon.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [businessCard, generalCard, sportsCard];
+  List<AssetGenImage> get values => [
+    businessCard,
+    generalCard,
+    languageIcon,
+    sportsCard,
+    technologyCard,
+    themeIcon,
+  ];
 }
 
 class Assets {

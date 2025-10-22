@@ -1,31 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/common/exetentions/theme_exetention.dart';
-import 'package:news_app/enums/category_enum.dart';
-import 'package:news_app/widgets/category_card_widget.dart';
+import 'package:news_app/pages/views/category_details.dart';
+import 'package:news_app/pages/views/category_view.dart';
+import 'package:news_app/pages/views/drawer_view.dart';
+import 'package:news_app/providers/category_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class MainLayerScreen extends StatelessWidget {
   const MainLayerScreen({super.key});
   static String routName = '/mainLayerScreen';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(),
-      appBar: AppBar(
-        title: Text('Home'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('''Good Morning
-Here is Some News For You''', style: context.getTheme.textTheme.titleMedium),
-            ...CategoryEnum.values.map(
-              (e) => CategoryCardWidget(categoryEnum: e),
+    return ChangeNotifierProvider(
+      create: (context) => categoryProvider(),
+      child: Consumer<categoryProvider>(
+        builder: (BuildContext context, categoryProvider value, Widget? child) {
+          return Scaffold(
+            drawer: Drawer(backgroundColor: Colors.black, child: DrawerView()),
+            appBar: AppBar(
+              title: Text(
+                value.selectedCategory != null
+                    ? value.selectedCategory!.name
+                    : 'Home',
+              ),
+              actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
             ),
-          ],
-        ),
+            body: value.selectedCategory != null
+                ? CategoryDetails()
+                : CategoryListView(),
+          );
+        },
       ),
     );
   }

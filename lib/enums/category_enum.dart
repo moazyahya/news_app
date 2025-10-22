@@ -1,9 +1,10 @@
 import 'package:news_app/gen/assets.gen.dart';
 
 enum CategoryEnum {
-  sports(name: 'sports'),
-  business(name: 'business'),
-  general(name: 'general');
+  sports(name: 'Sports'),
+  business(name: 'Business'),
+  general(name: 'General'),
+  technology(name: 'Technology');
 
   final String name;
 
@@ -17,6 +18,9 @@ enum CategoryEnum {
         return Assets.images.businessCard.path;
       case CategoryEnum.general:
         return Assets.images.generalCard.path;
+
+      case CategoryEnum.technology:
+        return Assets.images.technologyCard.path;
     }
   }
 }
