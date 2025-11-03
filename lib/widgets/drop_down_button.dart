@@ -1,16 +1,54 @@
 import 'package:flutter/material.dart';
 
 class DropDownButton extends StatelessWidget {
-  DropDownButton({required this.items, super.key});
-  List<DropdownMenuItem<String>>? items = [];
+  const DropDownButton({
+    super.key,
+    required this.items,
+    required this.value,
+    required this.onChanged,
+  });
+
+  final List<String> items;
+  final String value;
+  final Function(String?) onChanged;
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 56,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.white),
       ),
-      child: DropdownButton(items: items, onChanged: (value) {}),
+      child: DropdownButton<String>(
+        iconDisabledColor: Colors.white,
+        iconEnabledColor: Colors.white,
+        iconSize: 30,
+        elevation: 10,
+        isExpanded: true,
+        padding: EdgeInsets.only(left: 16),
+        dropdownColor: Colors.black,
+        value: value,
+        underline: SizedBox(),
+        items: items
+            .map(
+              (item) => DropdownMenuItem(
+                value: item,
+                child: Text(
+                  item,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            )
+            .toList(),
+        onChanged: onChanged,
+      ),
     );
   }
 }

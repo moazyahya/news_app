@@ -18,13 +18,25 @@ class $AssetsImagesGen {
   AssetGenImage get businessCard =>
       const AssetGenImage('assets/images/business_card.png');
 
+  /// File path: assets/images/entertainment_card.png
+  AssetGenImage get entertainmentCard =>
+      const AssetGenImage('assets/images/entertainment_card.png');
+
   /// File path: assets/images/general_card.png
   AssetGenImage get generalCard =>
       const AssetGenImage('assets/images/general_card.png');
 
+  /// File path: assets/images/health_card.png
+  AssetGenImage get healthCard =>
+      const AssetGenImage('assets/images/health_card.png');
+
   /// File path: assets/images/language_icon.png
   AssetGenImage get languageIcon =>
       const AssetGenImage('assets/images/language_icon.png');
+
+  /// File path: assets/images/science_card.png
+  AssetGenImage get scienceCard =>
+      const AssetGenImage('assets/images/science_card.png');
 
   /// File path: assets/images/sports_card.png
   AssetGenImage get sportsCard =>
@@ -41,8 +53,11 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     businessCard,
+    entertainmentCard,
     generalCard,
+    healthCard,
     languageIcon,
+    scienceCard,
     sportsCard,
     technologyCard,
     themeIcon,
