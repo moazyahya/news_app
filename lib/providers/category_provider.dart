@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/enums/category_enum.dart';
+import 'package:news_app/common/enums/category_enum.dart';
 
 class categoryProvider extends ChangeNotifier {
   CategoryEnum? selectedCategory;

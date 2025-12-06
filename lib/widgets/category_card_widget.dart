@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/common/exetentions/theme_exetention.dart';
-import 'package:news_app/enums/category_enum.dart';
+import 'package:news_app/common/enums/category_enum.dart';
+import 'package:news_app/features/articles/viewModel/articles_provieder.dart';
 import 'package:news_app/providers/category_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class CategoryCardWidget extends StatelessWidget {
           context,
           listen: false,
         ).setSelectedCategory(categoryEnum);
+        context.read<ArticlesProvieder>().getSourses(categoryEnum.name);
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 8),

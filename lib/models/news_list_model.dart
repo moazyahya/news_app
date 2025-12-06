@@ -1,12 +1,17 @@
-class NewsListModel {
+class ArticlesListModel {
   String? status;
   String? message;
   int? totalResults;
   List<Articles>? articles;
 
-  NewsListModel({this.status, this.totalResults, this.articles, this.message});
+  ArticlesListModel({
+    this.status,
+    this.totalResults,
+    this.articles,
+    this.message,
+  });
 
-  NewsListModel.fromJson(Map<String, dynamic> json) {
+  ArticlesListModel.fromJson(Map<String, dynamic> json) {
     if (json["status"] is String) {
       status = json["status"];
     }
@@ -25,8 +30,8 @@ class NewsListModel {
     }
   }
 
-  static List<NewsListModel> fromList(List<Map<String, dynamic>> list) {
-    return list.map(NewsListModel.fromJson).toList();
+  static List<ArticlesListModel> fromList(List<Map<String, dynamic>> list) {
+    return list.map(ArticlesListModel.fromJson).toList();
   }
 
   Map<String, dynamic> toJson() {

@@ -28,7 +28,11 @@ class _DrawerViewState extends State<DrawerView> {
           height: 166,
           child: Text(
             'News App',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
         Padding(

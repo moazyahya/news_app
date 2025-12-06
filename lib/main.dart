@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/common/theme/app_theme.dart';
+import 'package:news_app/providers/app_setting_proviser.dart';
 import 'package:news_app/screens/main_layer_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppSetteingProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: Provider.of<AppSetteingProvider>(context).currentThemeMode,
       routes: {MainLayerScreen.routName: (_) => MainLayerScreen()},
       initialRoute: MainLayerScreen.routName,
     );
