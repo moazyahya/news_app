@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/common/theme/app_theme.dart';
 import 'package:news_app/common/providers/app_setting_proviser.dart';
 import 'package:news_app/features/categories/views/main_layer_screen.dart';

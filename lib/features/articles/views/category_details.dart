@@ -44,7 +44,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  viewModel.sourcesError!,
+                  viewModel.sourcesError!.toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: context.getTheme.colorScheme.secondary,

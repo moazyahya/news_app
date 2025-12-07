@@ -35,7 +35,7 @@ class _NewsListState extends State<NewsList> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Text(viewModel.articlesError!),
+                child: Text(viewModel.articlesError!.toString()),
               ),
               TextButton.icon(
                 style: TextButton.styleFrom(

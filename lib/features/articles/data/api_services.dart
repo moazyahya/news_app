@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/common/error/faliure_model.dart';
 import 'package:news_app/features/articles/data/models/news_list_model.dart';
 import 'package:news_app/features/articles/data/models/sources_model.dart';
 import 'package:news_app/common/network/api_consts.dart';
@@ -17,12 +18,15 @@ class ApiServices {
       if (response.statusCode == 200 && sourcesModel.status == "ok") {
         return sourcesModel;
       } else {
-        throw sourcesModel.message ?? "something wrong";
+        throw BaseError(
+          errorMassege: sourcesModel.message ?? 'somthing wrong',
+          errorCode: response.statusCode,
+        );
       }
     } on DioException catch (e) {
-      throw Text(e.message ?? 'something wrong');
+      throw FaliureModel.getNetWorkError(e);
     } catch (e) {
-      throw e.toString();
+      throw BaseError(errorMassege: e.toString());
     }
   }
 
@@ -32,18 +36,21 @@ class ApiServices {
         ApiConsts.newsEndPoint,
         queryParameters: {'apiKey': ApiConsts.apiKey, 'Sources': sourceId},
       );
-      ArticlesListModel newsListModel = ArticlesListModel.fromJson(
+      ArticlesListModel articlsListModel = ArticlesListModel.fromJson(
         response.data,
       );
-      if (response.statusCode == 200 && newsListModel.status == "ok") {
-        return newsListModel;
+      if (response.statusCode == 200 && articlsListModel.status == "ok") {
+        return articlsListModel;
       } else {
-        throw newsListModel.message ?? 'somthing wrong';
+        throw BaseError(
+          errorMassege: articlsListModel.message ?? 'somthing wrong',
+          errorCode: response.statusCode,
+        );
       }
     } on DioException catch (e) {
-      throw e.message ?? 'something wrong';
+      throw FaliureModel.getNetWorkError(e);
     } catch (e) {
-      throw e.toString();
+      throw BaseError(errorMassege: e.toString());
     }
   }
 }
