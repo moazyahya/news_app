@@ -1,0 +1,25 @@
+flutter_native_splash:
+
+  android: true
+  ios: true
+
+  color: "#FFFFFF"  # REQUIRED
+  color_dark: "#000000"
+
+  image: assets/images/Splash_logo_light.png
+  image_dark: assets/images/Splash_logo_dark.png
+
+  fullscreen: true
+
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#000000"
+
+    image: assets/images/Splash_logo_light.png
+    image_dark: assets/images/Splash_logo_dark.png
+
+    icon_background_color: "#FFFFFF"
+    icon_background_color_dark: "#000000"
+
+    branding: assets/images/Route_logo_light.png
+    branding_dark: assets/images/Route_logo_dark.png

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/common/network/api_services.dart';
-import 'package:news_app/models/news_list_model.dart';
-import 'package:news_app/models/sources_model.dart';
+import 'package:news_app/features/articles/data/api_services.dart';
+import 'package:news_app/features/articles/data/models/news_list_model.dart';
+import 'package:news_app/features/articles/data/models/sources_model.dart';
 
-class ArticlesProvieder extends ChangeNotifier {
+class ArticlesProvider extends ChangeNotifier {
   SourcesModel? sourcesModel;
   bool sourseLoading = false, articleLoading = false;
   String? sourcesError, articlesError;

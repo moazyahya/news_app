@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/common/exetentions/theme_exetention.dart';
-import 'package:news_app/models/news_list_model.dart';
+import 'package:news_app/features/articles/data/models/news_list_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsCardWidget extends StatelessWidget {

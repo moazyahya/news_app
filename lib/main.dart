@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/common/theme/app_theme.dart';
-import 'package:news_app/providers/app_setting_proviser.dart';
-import 'package:news_app/screens/main_layer_screen.dart';
+import 'package:news_app/common/providers/app_setting_proviser.dart';
+import 'package:news_app/features/categories/views/main_layer_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: Provider.of<AppSetteingProvider>(context).currentThemeMode,
+      themeMode: ThemeMode.dark,
       routes: {MainLayerScreen.routName: (_) => MainLayerScreen()},
       initialRoute: MainLayerScreen.routName,
     );
