@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DropDownButton extends StatelessWidget {
+class DropDownButton<T> extends StatelessWidget {
   const DropDownButton({
     super.key,
     required this.items,
@@ -8,9 +8,9 @@ class DropDownButton extends StatelessWidget {
     required this.onChanged,
   });
 
-  final List<String> items;
-  final String value;
-  final Function(String?) onChanged;
+  final List<DropdownMenuItem<T>> items;
+  final T value;
+  final void Function(T?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class DropDownButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.white),
       ),
-      child: DropdownButton<String>(
+      child: DropdownButton<T>(
         iconDisabledColor: Colors.white,
         iconEnabledColor: Colors.white,
         iconSize: 30,
@@ -32,21 +32,7 @@ class DropDownButton extends StatelessWidget {
         dropdownColor: Colors.black,
         value: value,
         underline: SizedBox(),
-        items: items
-            .map(
-              (item) => DropdownMenuItem(
-                value: item,
-                child: Text(
-                  item,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            )
-            .toList(),
+        items: items,
         onChanged: onChanged,
       ),
     );

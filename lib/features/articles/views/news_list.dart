@@ -3,6 +3,7 @@ import 'package:news_app/common/exetentions/theme_exetention.dart';
 import 'package:news_app/features/articles/viewModel/articles_provieder.dart';
 import 'package:news_app/features/articles/views/widgets/news_card_widget.dart';
 import 'package:news_app/features/articles/data/models/news_list_model.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class NewsList extends StatefulWidget {
@@ -48,7 +49,7 @@ class _NewsListState extends State<NewsList> {
                 icon: Icon(Icons.replay_outlined),
                 iconAlignment: IconAlignment.end,
                 label: Text(
-                  'Reload',
+                  AppLocalizations.of(context)!.reload,
                   style: TextStyle(color: context.getTheme.colorScheme.primary),
                 ),
               ),
@@ -61,7 +62,7 @@ class _NewsListState extends State<NewsList> {
         if (articals.isEmpty) {
           return Center(
             child: Text(
-              'No Articsls',
+              AppLocalizations.of(context)!.noArticsls,
               style: TextStyle(color: context.getTheme.colorScheme.secondary),
             ),
           );

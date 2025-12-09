@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/common/exetentions/theme_exetention.dart';
 import 'package:news_app/features/categories/data/enums/category_enum.dart';
 import 'package:news_app/features/categories/viewModel/category_provider.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CategoryCardWidget extends StatelessWidget {
@@ -59,7 +60,7 @@ class CategoryCardWidget extends StatelessWidget {
                         bottom: 9,
                       ),
                       child: Text(
-                        'View All',
+                        AppLocalizations.of(context)!.viewAll,
                         style: TextStyle(
                           color: context.getTheme.colorScheme.secondary,
                           fontSize: 24,
@@ -110,7 +111,7 @@ class CategoryCardWidget extends StatelessWidget {
                         bottom: 9,
                       ),
                       child: Text(
-                        'View All',
+                        AppLocalizations.of(context)!.viewAll,
                         style: TextStyle(
                           color: context.getTheme.colorScheme.secondary,
                           fontSize: 24,

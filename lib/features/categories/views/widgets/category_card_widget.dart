@@ -3,6 +3,7 @@ import 'package:news_app/common/exetentions/theme_exetention.dart';
 import 'package:news_app/features/categories/data/enums/category_enum.dart';
 import 'package:news_app/features/articles/viewModel/articles_provieder.dart';
 import 'package:news_app/features/categories/viewModel/category_provider.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CategoryCardWidget extends StatelessWidget {
@@ -11,48 +12,72 @@ class CategoryCardWidget extends StatelessWidget {
     required this.categoryEnum,
     required this.isRight,
   });
+
   final CategoryEnum categoryEnum;
   final bool isRight;
+
   @override
   Widget build(BuildContext context) {
+    final theme = context.getTheme;
+
     return InkWell(
       onTap: () {
-        Provider.of<CategoryProvider>(
-          context,
-          listen: false,
-        ).setSelectedCategory(categoryEnum);
-        context.read<ArticlesProvider>().getSourses(categoryEnum.name);
+        context.read<CategoryProvider>().setSelectedCategory(categoryEnum);
+        context.read<ArticlesProvider>().getSourses(
+          categoryEnum.getTranslatedName(context),
+        );
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         height: 198.04,
-        width: 363,
+        width: double.infinity,
+        alignment: isRight ? Alignment.centerRight : Alignment.centerLeft,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           image: DecorationImage(
             image: AssetImage(categoryEnum.getImagePath()),
+            fit: BoxFit.cover,
           ),
-          color: context.getTheme.colorScheme.secondary,
+          color: theme.colorScheme.secondary,
         ),
-        child: Container(
-          width: 159,
-          height: 54,
-          margin: EdgeInsets.only(
-            left: isRight ? 178 : 16,
-            top: 128,
-            right: isRight ? 16 : 178,
-            bottom: 16,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(84),
-            color: context.getTheme.scaffoldBackgroundColor.withValues(
-              alpha: 0.5,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Align(
+              alignment: isRight ? Alignment.centerRight : Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  right: isRight ? 40 : 0,
+                  left: isRight ? 0 : 20,
+                  top: 25,
+                ),
+
+                child: Text(
+                  categoryEnum.getTranslatedName(context),
+                  textAlign: isRight ? TextAlign.right : TextAlign.left,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
             ),
-          ),
-          child: isRight
-              ? Row(
+
+            Align(
+              alignment: isRight ? Alignment.centerRight : Alignment.centerLeft,
+              child: Container(
+                width: 180,
+                height: 54,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(84),
+                  color: theme.scaffoldBackgroundColor.withValues(alpha: 0.5),
+                ),
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    if (!isRight) _circleIcon(theme, isRight),
                     Padding(
                       padding: const EdgeInsets.only(
                         right: 10,
@@ -61,68 +86,37 @@ class CategoryCardWidget extends StatelessWidget {
                         bottom: 9,
                       ),
                       child: Text(
-                        'View All',
+                        AppLocalizations.of(context)!.viewAll,
                         style: TextStyle(
-                          color: context.getTheme.colorScheme.secondary,
-                          fontSize: 24,
+                          color: theme.colorScheme.secondary,
+                          fontSize: 22,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
                     Spacer(),
-                    Container(
-                      width: 54,
-                      height: 54,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: context.getTheme.colorScheme.primary,
-                      ),
-                      child: Icon(
-                        isRight
-                            ? Icons.arrow_forward_ios
-                            : Icons.arrow_back_ios,
-                        color: context.getTheme.colorScheme.secondary,
-                      ),
-                    ),
-                  ],
-                )
-              : Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 54,
-                      height: 54,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: context.getTheme.colorScheme.primary,
-                      ),
-                      child: Icon(
-                        isRight
-                            ? Icons.arrow_forward_ios
-                            : Icons.arrow_back_ios,
-                        color: context.getTheme.colorScheme.secondary,
-                      ),
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        right: 16,
-                        left: 10,
-                        top: 9,
-                        bottom: 9,
-                      ),
-                      child: Text(
-                        'View All',
-                        style: TextStyle(
-                          color: context.getTheme.colorScheme.secondary,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
+                    if (isRight) _circleIcon(theme, isRight),
                   ],
                 ),
+              ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _circleIcon(ThemeData theme, bool isRight) {
+    return Container(
+      width: 54,
+      height: 54,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: theme.colorScheme.primary,
+      ),
+      child: Icon(
+        isRight ? Icons.arrow_forward_ios : Icons.arrow_back_ios,
+        color: theme.colorScheme.secondary,
       ),
     );
   }

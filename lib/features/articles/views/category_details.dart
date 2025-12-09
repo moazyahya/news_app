@@ -4,6 +4,7 @@ import 'package:news_app/features/articles/viewModel/articles_provieder.dart';
 import 'package:news_app/features/articles/views/news_list.dart';
 import 'package:news_app/features/articles/data/models/sources_model.dart';
 import 'package:news_app/features/categories/viewModel/category_provider.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDetails extends StatefulWidget {
@@ -69,7 +70,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                   icon: const Icon(Icons.replay_outlined),
                   iconAlignment: IconAlignment.end,
                   label: Text(
-                    'Reload',
+                    AppLocalizations.of(context)!.reload,
                     style: TextStyle(
                       color: context.getTheme.colorScheme.primary,
                     ),
@@ -85,7 +86,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
         if (sources.isEmpty) {
           return Center(
             child: Text(
-              'No sources available',
+              AppLocalizations.of(context)!.noSources,
               style: TextStyle(color: context.getTheme.colorScheme.secondary),
             ),
           );

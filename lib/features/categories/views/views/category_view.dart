@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/common/exetentions/theme_exetention.dart';
 import 'package:news_app/features/categories/data/enums/category_enum.dart';
 import 'package:news_app/features/categories/views/widgets/category_card_widget.dart';
+import 'package:news_app/l10n/app_localizations.dart';
 
 class CategoryListView extends StatelessWidget {
   const CategoryListView({super.key});
@@ -13,8 +14,10 @@ class CategoryListView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('''Good Morning
-Here is Some News For You''', style: context.getTheme.textTheme.titleMedium),
+          Text(
+            AppLocalizations.of(context)!.hello,
+            style: context.getTheme.textTheme.titleMedium,
+          ),
 
           ...List.generate(
             CategoryEnum.values.length,
