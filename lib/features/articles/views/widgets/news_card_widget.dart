@@ -4,10 +4,18 @@ import 'package:news_app/common/exetentions/theme_exetention.dart';
 import 'package:news_app/features/articles/data/models/news_list_model.dart';
 import 'package:news_app/l10n/app_localizations.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-class NewsCardWidget extends StatelessWidget {
+class NewsCardWidget extends StatefulWidget {
   const NewsCardWidget({super.key, required this.articales});
   final Articles articales;
+
+  @override
+  State<NewsCardWidget> createState() => _NewsCardWidgetState();
+}
+
+class _NewsCardWidgetState extends State<NewsCardWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -31,10 +39,10 @@ class NewsCardWidget extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(articales.urlToImage ?? ""),
+                      child: Image.network(widget.articales.urlToImage ?? ""),
                     ),
                     Text(
-                      articales.title ?? '',
+                      widget.articales.title ?? '',
                       style: TextStyle(
                         color: context.getTheme.colorScheme.primary,
                         fontWeight: FontWeight.bold,
@@ -43,7 +51,7 @@ class NewsCardWidget extends StatelessWidget {
                       textAlign: TextAlign.justify,
                     ),
                     Text(
-                      articales.description ?? '',
+                      widget.articales.description ?? '',
                       style: TextStyle(
                         color: context.getTheme.colorScheme.primary,
                         fontWeight: FontWeight.w400,
@@ -62,7 +70,21 @@ class NewsCardWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          final url = widget.articales.url ?? '';
+                          try {
+                            await launchUrlString(
+                              url,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Cannot open the article'),
+                              ),
+                            );
+                          }
+                        },
                         child: Text(
                           AppLocalizations.of(context)!.viewFullArticel,
                           style: TextStyle(
@@ -93,7 +115,7 @@ class NewsCardWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: CachedNetworkImage(
-                imageUrl: articales.urlToImage ?? '',
+                imageUrl: widget.articales.urlToImage ?? '',
                 errorWidget: (context, url, error) =>
                     Icon(Icons.broken_image_outlined),
 
@@ -107,7 +129,7 @@ class NewsCardWidget extends StatelessWidget {
               ),
             ),
             Text(
-              articales.title ?? '',
+              widget.articales.title ?? '',
               style: TextStyle(
                 color: context.getTheme.colorScheme.secondary,
                 fontSize: 16,
@@ -120,7 +142,7 @@ class NewsCardWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    articales.description ?? '',
+                    widget.articales.description ?? '',
                     style: TextStyle(
                       color: Color(0xffA0A0A0),
                       fontWeight: FontWeight.w400,
@@ -130,7 +152,9 @@ class NewsCardWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  timeago.format(DateTime.parse(articales.publishedAt ?? '')),
+                  timeago.format(
+                    DateTime.parse(widget.articales.publishedAt ?? ''),
+                  ),
                   style: TextStyle(
                     color: Color(0xffA0A0A0),
                     fontWeight: FontWeight.w400,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/common/theme/app_theme.dart';
 import 'package:news_app/common/providers/app_setting_proviser.dart';
+import 'package:news_app/features/articles/views/search_view.dart';
 import 'package:news_app/features/categories/views/main_layer_screen.dart';
 import 'package:news_app/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -27,16 +28,16 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        Locale('en'), // English
-        Locale('ar'), // Spanish
-      ],
+      supportedLocales: [Locale('en'), Locale('ar')],
       locale: Locale(Provider.of<AppSetteingProvider>(context).currentLocale),
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: Provider.of<AppSetteingProvider>(context).currentThemeMode,
-      routes: {MainLayerScreen.routName: (_) => MainLayerScreen()},
+      routes: {
+        MainLayerScreen.routName: (_) => MainLayerScreen(),
+        SearchView.routeName: (_) => SearchView(),
+      },
       initialRoute: MainLayerScreen.routName,
     );
   }

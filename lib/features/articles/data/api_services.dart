@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:news_app/common/error/faliure_model.dart';
 import 'package:news_app/features/articles/data/models/news_list_model.dart';
 import 'package:news_app/features/articles/data/models/sources_model.dart';
@@ -44,6 +43,37 @@ class ApiServices {
       } else {
         throw BaseError(
           errorMassege: articlsListModel.message ?? 'somthing wrong',
+          errorCode: response.statusCode,
+        );
+      }
+    } on DioException catch (e) {
+      throw FaliureModel.getNetWorkError(e);
+    } catch (e) {
+      throw BaseError(errorMassege: e.toString());
+    }
+  }
+
+  static Future<ArticlesListModel> searchNews(String query) async {
+    try {
+      Response response = await dio.get(
+        ApiConsts.searchEndPoint,
+        queryParameters: {
+          'apiKey': ApiConsts.apiKey,
+          'q': query,
+          'sortBy': 'publishedAt',
+          'language': 'en',
+        },
+      );
+
+      ArticlesListModel articlesListModel = ArticlesListModel.fromJson(
+        response.data,
+      );
+
+      if (response.statusCode == 200 && articlesListModel.status == "ok") {
+        return articlesListModel;
+      } else {
+        throw BaseError(
+          errorMassege: articlesListModel.message ?? 'Something wrong',
           errorCode: response.statusCode,
         );
       }

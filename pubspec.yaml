@@ -43,6 +43,9 @@ dependencies:
   flutter_native_splash: ^2.4.7
   flutter_screenutil: ^5.9.3
   flutter_localization: ^0.3.3
+  pretty_dio_logger: ^1.4.0
+  flutter_bloc: ^9.1.1
+  fluttertoast: ^9.0.0
   
 
 dev_dependencies:
